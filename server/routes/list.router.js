@@ -5,7 +5,7 @@ const listRouter = express.Router();
 const pg = require('pg');
 
 const config = {
-    database: 'todoList',
+    database: 'weekend-to-do-app',
     host: 'localhost',
     port: 5432,
     max: 10,
@@ -24,7 +24,7 @@ pool.on('error', (error) => {
 
 // GET
 listRouter.get('/', (req,res) => {
-    let sqlText = `SELECT * FROM list ORDER BY item ASC;`;
+    let sqlText = `SELECT * FROM list ORDER BY item DESC;`;
     pool.query(sqlText)
         .then((result) => {
         res.send(result.rows);
@@ -55,5 +55,20 @@ listRouter.post('/', (req, res) => {
 // PUT
 
 // DELETE
+listRouter.delete('/:id', (req, res) => {
+    let reqId = req.params.id;
+    console.log(reqId);
+    let sqlText = 'DELETE FROM list WHERE id=$1;';
+    pool.query(sqlText, [reqId])
+    .then((result) => {
+        console.log('task deleted');
+        res.sendStatus(200);
+    })
+    .catch((error) => {
+        console.log(`error making db query`, sqlText, error);
+        res.sendStatus(500);
+    })
+ });
+ 
 
 module.exports = listRouter;

@@ -6,13 +6,34 @@ function readyNow(){
 } // end readyNow
 
 function clickListeners() {
-    $('#add-btn').on('click', addNewTask)
+    $('#add-btn').on('click', addNewTask);
+
+    $('#todo-list').on('click', '.delete-btn', function() {
+        let taskId = $(this).closest('tr').data('id');
+        console.log(taskId);
+        deleteTask(taskId);
+    });    
 } // end clickListeners
+
+function deleteTask(taskId) {
+    console.log('in deleteTask');
+    $.ajax({
+        method: 'DELETE',
+        url: `/list/${taskId}`
+    })
+    .then( function (response) {
+        console.log(response);
+        getToDoList();  
+    })
+    .catch( function (error) {
+        console.log(error);        
+    })
+} // end deleteTask
 
 function addNewTask() {
     event.preventDefault();
     console.log('in addTask');
-    // object incase more properties added
+    // object if more properties need to be added for hw
     let newTask = {
         item: $('#task-in').val()
     };
@@ -62,9 +83,12 @@ function displayList(list) {
         <tr>
             <td>${task.item}</td>
             <td><button id="complete-btn">Complete</button></td>
-            <td><button id="delete-btn">Delete</button></td>
+            <td><button class="delete-btn btn-danger">Delete</button></td>
         </tr>`);
         $('#todo-list').append(tr);
+        tr.data('id', task.id);
+        console.log(task.id);
+        
     } // end for of
 } // end displayList
 
