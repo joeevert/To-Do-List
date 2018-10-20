@@ -1,27 +1,46 @@
-console.log('js');
-
 $(document).ready(readyNow);
 
 function readyNow(){
-    console.log('JQ');
     clickListeners();
     getToDoList();
 } // end readyNow
 
 function clickListeners() {
-    $('#add-btn').on('click', addTask)
+    $('#add-btn').on('click', addNewTask)
 } // end clickListeners
 
-// POST
-function addTask() {
+function addNewTask() {
     event.preventDefault();
-    console.log('in addTask');   
+    console.log('in addTask');
+    // object incase more properties added
+    let newTask = {
+        item: $('#task-in').val()
+    };
+    console.log(newTask);
+    postTask(newTask);
 } // end addTask
+
+// POST
+function postTask(newTask) {
+    console.log('in postTask');
+    $.ajax({
+        method: 'POST',
+        url: '/list',
+        data: newTask
+    })
+    .then( function (response) {
+        console.log(response);
+        getToDoList();
+        clearInputs();
+    })
+    .catch( function (error) {
+        console.log(error);
+    })
+} // end postTask
 
 // GET
 function getToDoList() {
     console.log('in getList');
-    
     $.ajax({
         method: 'GET',
         url: '/list'
@@ -48,3 +67,7 @@ function displayList(list) {
         $('#todo-list').append(tr);
     } // end for of
 } // end displayList
+
+function clearInputs() {
+    $('#task-in').val('')
+} // end clearInputs

@@ -30,13 +30,27 @@ listRouter.get('/', (req,res) => {
         res.send(result.rows);
         console.log(result.rows);
     })
-        .catch( (error) => {
-    console.log(`error make db query:`, sqlText, error); // have question
-    res.sendStatus(500);
+    .catch( (error) => {
+        console.log(`error make db query:`, sqlText, error); // have question
+        res.sendStatus(500);
     })
-});
+}); // end GET
 
 // POST
+listRouter.post('/', (req, res) => {
+    const newTask = req.body;
+    console.log(newTask);
+    const sqlText = `INSERT INTO list (item) VALUES ($1);`;
+    pool.query(sqlText, [newTask.item])
+    .then((result) => {
+        console.log(result);
+        res.sendStatus(201);
+    })
+    .catch((error) => {
+        console.log('error sending to db', error);
+        res.sendStatus(500);
+    })
+}); // end POST
 
 // PUT
 
