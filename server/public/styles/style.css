@@ -1,3 +1,17 @@
 .jumbotron {
     background-color: cornflowerblue;
 }
+
+input {
+    width: 50%;
+}
+
+button {
+    background: #ccc;
+    text-align: center;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #666;
+}
