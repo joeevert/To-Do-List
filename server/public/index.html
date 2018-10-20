@@ -11,6 +11,41 @@
     <script type="text/javascript" src="client.js"></script>
 </head>
 <body>
-    <h1>TO DO LIST</h1>
+    <section class="jumbotron text-center">
+            <h1>To Do List</h1>
+    </section>
+    <section class="container">
+        <!-- <h2>Add Task</h2> -->
+        <div>
+            <form>
+                <label for="task-in"><h4>Task:</h4></label>
+                <input type="text" id="task-in" placeholder="enter task">
+                <button id="add-btn">Add</button>
+            </form>
+        </div>
+    </section>
+    <section class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Something</th>
+                    <th>Something</th>
+                </tr>
+            </thead>
+            <tbody id="todo-list">
+                <tr>
+                    <td>get homework done</td>
+                    <td><button id="edit-btn">Edit</button></td>
+                    <td><button id="remove-btn">Remove</button></td>
+                </tr>
+                <!-- JQ append -->
+            </tbody>
+        </table>
+        
+    </section>
+
+
+
 </body>
 </html>
