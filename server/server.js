@@ -1,17 +1,22 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const listRouter = require('./routes/list.router.js');
 
 const app = express();
 
-app.use( bodyParser.urlencoded({ extended: true }) );
-app.use( bodyParser.json() );
+const bodyParser = require('body-parser');
 
-app.use( '/list', listRouter);
+const PORT = process.env.PORT || 5000;
 
-app.use( express.static('server/public') );
+const listRouter = require('./routes/list.router');
 
-const port = process.env.port || 5000;
-app.listen( port, () => {
-  console.log(`up and running on port, ${port}`);
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+app.use(express.static('server/public'));
+
+// ROUTES
+app.use('/list', listRouter);
+
+// Start listening for requests on a specific port
+app.listen(PORT, () => {
+  console.log(`up and running on port, ${PORT}`);
 });

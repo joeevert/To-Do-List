@@ -2,10 +2,14 @@
 
 CREATE TABLE list (
     id SERIAL PRIMARY KEY,
-	task VARCHAR (100) NOT NULL,
-	notes VARCHAR (400) NOT NULL,
-	created DATE
-    checkbox -- look this up
+    taskName VARCHAR (100) NOT NULL,
 );
 
-INSERT INTO todo_list (task)
+INSERT INTO todo_list (taskName)
+VALUES ('Do your homework');
+
+INSERT INTO todo_list (taskName)
+VALUES ('Groceries');
+
+INSERT INTO todo_list (taskName)
+VALUES ('Mow the lawn);

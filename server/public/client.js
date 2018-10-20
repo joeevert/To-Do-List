@@ -5,7 +5,8 @@ $(document).ready(readyNow);
 function readyNow(){
     console.log('JQ');
     clickListeners();
-}
+    getToDoList();
+} // end readyNow
 
 function clickListeners() {
     $('#add-btn').on('click', addTask)
@@ -18,7 +19,7 @@ function addTask() {
 } // end addTask
 
 // GET
-function getList() {
+function getToDoList() {
     console.log('in getList');
     
     $.ajax({
@@ -26,7 +27,7 @@ function getList() {
         url: '/list'
     })
     .then( function (response) {
-        console.log(`response: ${response}`);
+        console.log(response);
         displayList(response);
     })
     .catch( function (error) {
@@ -38,12 +39,12 @@ function displayList(list) {
     console.log('in displayList');
     $('#todo-list').empty();
     for( let task of list) {
-        let element = `
+        let tr = $(`
         <tr>
-            <td>${task.name}</td>
-            <td><button id="edit-btn">Edit</button></td>
-            <td><button id="remove-btn">Remove</button></td>
-        </tr>`
-        $('#todo-list').append(element);
+            <td>${task.item}</td>
+            <td><button id="complete-btn">Complete</button></td>
+            <td><button id="delete-btn">Delete</button></td>
+        </tr>`);
+        $('#todo-list').append(tr);
     } // end for of
 } // end displayList
