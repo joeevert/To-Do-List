@@ -7,35 +7,63 @@ function readyNow(){
 
 function clickListeners() {
     $('#add-btn').on('click', addNewTask);
-
-    $('#todo-list').on('click', '.delete-btn', function() {
-        let taskId = $(this).closest('tr').data('id');
-        console.log(taskId);
-        deleteTask(taskId);
-    });    
+    $('#todo-list').on('click', '.delete-btn', deleteTask); 
+    $('#complete-btn').on('click', taskToggleComplete);
 } // end clickListeners
 
-function deleteTask(taskId) {
-    console.log('in deleteTask');
-    $.ajax({
-        method: 'DELETE',
-        url: `/list/${taskId}`
-    })
-    .then( function (response) {
-        console.log(response);
-        getToDoList();  
-    })
-    .catch( function (error) {
-        console.log(error);        
-    })
+function taskToggleComplete() {
+    $('#complete-btn')
+}
+
+function deleteTask() {
+    let taskId = $(this).closest('tr').data('id');
+    swal({
+        title: 'Are you sure?',
+        text: 'Once deleted, your task will be removed permanently!',
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+            swal('Your task has been deleted!', {
+            icon: 'success',
+            });
+        console.log('in deleteTask');
+        $.ajax({
+            method: 'DELETE',
+            url: `/list/${taskId}`
+        })
+        .then( function (response) {
+            console.log(response);
+            getToDoList();  
+        })
+        .catch( function (error) {
+            console.log(error);        
+        })
+        } // end if 
+        else {
+            swal('Your task remains!');
+        } // end else
+    });
 } // end deleteTask
 
 function addNewTask() {
     event.preventDefault();
+    if ( $('#task-in').val() == '' ) {
+        // alert('Not all inputs completed!');
+        swal({
+            title: 'Error!',
+            text: 'Not all inputs completed!',
+            icon: 'error'
+        });
+        return;
+    }
     console.log('in addTask');
     // object if more properties need to be added for hw
     let newTask = {
-        item: $('#task-in').val()
+        item: $('#task-in').val(),
+        // status: false
     };
     console.log(newTask);
     postTask(newTask);
@@ -77,12 +105,18 @@ function getToDoList() {
 
 function displayList(list) {
     console.log('in displayList');
+
     $('#todo-list').empty();
     for( let task of list) {
+        console.log('status', task.status);
+        let taskComplete = 'className';
+        if ( task.status === true ) {
+            taskComplete = 'taskComplete';
+        } // end if
         let tr = $(`
-        <tr>
+        <tr class="${taskComplete}">
             <td>${task.item}</td>
-            <td><button id="complete-btn">Complete</button></td>
+            <td><button id="complete-btn">Uncompleted</button></td>
             <td><button class="delete-btn btn-danger">Delete</button></td>
         </tr>`);
         $('#todo-list').append(tr);
@@ -93,5 +127,5 @@ function displayList(list) {
 } // end displayList
 
 function clearInputs() {
-    $('#task-in').val('')
+    $('#task-in').val('');
 } // end clearInputs

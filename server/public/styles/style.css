@@ -1,17 +1,15 @@
+body {
+    background: #eee;
+    font-family: 'Ubuntu', sans-serif;
+}
+
 .jumbotron {
-    background-color: cornflowerblue;
+    background-color: #ff6200;
 }
 
-input {
-    width: 50%;
+.taskComplete {
+    color: #fff;
+    background-color: green;
 }
 
-button {
-    background: #ccc;
-    text-align: center;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #666;
-}
+/* $('#dropdown').css('z-index','999')  */

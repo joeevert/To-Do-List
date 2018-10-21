@@ -5,8 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>WEEKEND-SQL-TO-DO_LIST</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
     <link rel="stylesheet" type="text/css" media="screen" href="vendors/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="styles/style.css" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript" src="vendors/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="client.js"></script>
 </head>
@@ -18,19 +20,23 @@
         <!-- <h2>Add Task</h2> -->
         <div>
             <form>
-                <label for="task-in"><h4>Task:</h4></label>
-                <input type="text" id="task-in" placeholder="enter task">
-                <button id="add-btn">Add</button>
+                <div class="input-group">
+                    <!-- <label for="task-in"><h4>Task:</h4></label> -->
+                    <input type="text" class="form-control" id="task-in" placeholder="Enter task">
+                    <div class="input-group-btn">
+                        <button class="btn btn-success" id="add-btn">Add</button>
+                    </div>
+                </div>
             </form>
         </div>
     </section>
     <section class="container">
-        <table class="table table-striped">
+        <table class="table">
             <thead>
                 <tr>
                     <th>Task</th>
-                    <th>Something</th>
-                    <th>Something</th>
+                    <th>Status</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody id="todo-list">
