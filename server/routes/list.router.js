@@ -61,6 +61,7 @@ listRouter.delete('/:id', (req, res) => {
     let sqlText = 'DELETE FROM list WHERE id=$1;';
     pool.query(sqlText, [reqId])
     .then((result) => {
+        console.log(result);
         console.log('task deleted');
         res.sendStatus(200);
     })
