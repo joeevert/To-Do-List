@@ -23,8 +23,9 @@ pool.on('error', (error) => {
 });
 
 // GET
-listRouter.get('/', (req,res) => {
+listRouter.get('/', (req,res) => {    
     let sqlText = `SELECT * FROM list ORDER BY item DESC;`;
+
     pool.query(sqlText)
         .then((result) => {
         res.send(result.rows);
@@ -41,6 +42,7 @@ listRouter.post('/', (req, res) => {
     const newTask = req.body;
     console.log(newTask);
     const sqlText = `INSERT INTO list (item) VALUES ($1);`;
+
     pool.query(sqlText, [newTask.item])
     .then((result) => {
         console.log(result);
@@ -53,13 +55,29 @@ listRouter.post('/', (req, res) => {
 }); // end POST
 
 // PUT
+listRouter.put('/status/:id', (req, res) => {
+    let taskId = req.params.id;
+    let sqlText = '';
+    sqlText = `UPDATE list SET status = true WHERE id=$1;`;
+
+    pool.query(sqlText, [taskId])
+    .then((result) => {
+        console.log(result);
+        res.sendStatus(200);
+    })
+    .catch((error) => {
+        console.log(`error making db query`, sqlText, error);
+        res.sendStatus(500);
+    })
+}); // end PUT
 
 // DELETE
 listRouter.delete('/:id', (req, res) => {
-    let reqId = req.params.id;
+    let taskId = req.params.id;
     console.log(reqId);
-    let sqlText = 'DELETE FROM list WHERE id=$1;';
-    pool.query(sqlText, [reqId])
+    let sqlText = `DELETE FROM list WHERE id=$1;`;
+
+    pool.query(sqlText, [taskId])
     .then((result) => {
         console.log(result);
         console.log('task deleted');
@@ -70,6 +88,5 @@ listRouter.delete('/:id', (req, res) => {
         res.sendStatus(500);
     })
  });
- 
 
 module.exports = listRouter;

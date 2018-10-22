@@ -8,7 +8,7 @@ function readyNow(){
 function clickListeners() {
     $('#add-btn').on('click', addNewTask);
     $('#todo-list').on('click', '.delete-btn', deleteTask); 
-    $('#complete-btn').on('click', taskToggleComplete);
+    $('#todo-list').on('click', '.complete-btn', taskStatus);
 } // end clickListeners
 
 function taskToggleComplete() {
@@ -63,7 +63,7 @@ function addNewTask() {
     // object if more properties need to be added for hw
     let newTask = {
         item: $('#task-in').val(),
-        // status: false
+        status: 'false'
     };
     console.log(newTask);
     postTask(newTask);
@@ -108,7 +108,6 @@ function displayList(list) {
 
     $('#todo-list').empty();
     for( let task of list) {
-        console.log('status', task.status);
         let taskComplete = 'className';
         if ( task.status === true ) {
             taskComplete = 'taskComplete';
@@ -116,16 +115,32 @@ function displayList(list) {
         let tr = $(`
         <tr class="${taskComplete}">
             <td>${task.item}</td>
-            <td><button id="complete-btn">Uncompleted</button></td>
+            <td><button class="complete-btn">Uncompleted</button></td>
             <td><button class="delete-btn btn-danger">Delete</button></td>
         </tr>`);
         $('#todo-list').append(tr);
         tr.data('id', task.id);
         console.log(task.id);
-        
+        tr.data('status', task.status);
+        console.log('status', task.status);        
     } // end for of
 } // end displayList
 
 function clearInputs() {
     $('#task-in').val('');
 } // end clearInputs
+
+function taskStatus() {
+    console.log('in taskComplete');
+    let taskId = $(this).closest('tr').data('id');
+    $.ajax({
+        method: 'PUT',
+        url: `list/status/${taskId}`
+    })
+    .then(function(response){
+        getToDoList();
+    })
+    .catch(function(error){
+        console.log('error on complete task', error);
+    })
+} // end taskStatus
