@@ -11,12 +11,10 @@ function clickListeners() {
     $('#todo-list').on('click', '.complete-btn', taskStatus);
 } // end clickListeners
 
-function taskToggleComplete() {
-    $('#complete-btn')
-}
-
+// DELETE
 function deleteTask() {
     let taskId = $(this).closest('tr').data('id');
+    // swall alert for delete
     swal({
         title: 'Are you sure?',
         text: 'Once deleted, your task will be removed permanently!',
@@ -50,15 +48,15 @@ function deleteTask() {
 
 function addNewTask() {
     event.preventDefault();
-    if ( $('#task-in').val() == '' ) {
-        // alert('Not all inputs completed!');
+    if ( $('#task-in').val() === '' ) {
+        // swal alert for not all inputs completed
         swal({
             title: 'Error!',
             text: 'Not all inputs completed!',
             icon: 'error'
         });
         return;
-    }
+    } // end if
     console.log('in addTask');
     // object if more properties need to be added for hw
     let newTask = {
@@ -111,18 +109,33 @@ function displayList(list) {
         let taskComplete = 'className';
         if ( task.status === true ) {
             taskComplete = 'taskComplete';
-        } // end if
+        }
+
         let tr = $(`
         <tr class="${taskComplete}">
             <td>${task.item}</td>
-            <td><button class="complete-btn">Uncompleted</button></td>
+            <td><button class="complete-btn">Complete</button></td>
             <td><button class="delete-btn btn-danger">Delete</button></td>
         </tr>`);
+        
+        // attempting to use checkbox input that will toggle class
+        // also want to get the button toggle to update the database status -- if else in PUT request?
+        // let tr = $(`
+        // <tr class="checkTask">
+        //     <td>${task.item}</td>
+        //     <td><div class="form-check">
+        //         <input type="checkbox" class="form-check-input">
+        //         <label class="form-check-label">Check when completed</label>
+        //     </div></td>
+        //     <td><button class="delete-btn btn-danger">Delete</button></td>
+        // </tr>`);
+
         $('#todo-list').append(tr);
+
         tr.data('id', task.id);
         console.log(task.id);
         tr.data('status', task.status);
-        console.log('status', task.status);        
+        console.log('status', task.status);
     } // end for of
 } // end displayList
 
@@ -130,6 +143,7 @@ function clearInputs() {
     $('#task-in').val('');
 } // end clearInputs
 
+// PUT
 function taskStatus() {
     console.log('in taskComplete');
     let taskId = $(this).closest('tr').data('id');

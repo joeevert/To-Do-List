@@ -41,9 +41,9 @@ listRouter.get('/', (req,res) => {
 listRouter.post('/', (req, res) => {
     const newTask = req.body;
     console.log(newTask);
-    const sqlText = `INSERT INTO list (item) VALUES ($1);`;
+    const sqlText = `INSERT INTO list (item, status) VALUES ($1, $2);`;
 
-    pool.query(sqlText, [newTask.item])
+    pool.query(sqlText, [newTask.item, newTask.status])
     .then((result) => {
         console.log(result);
         res.sendStatus(201);
@@ -74,7 +74,7 @@ listRouter.put('/status/:id', (req, res) => {
 // DELETE
 listRouter.delete('/:id', (req, res) => {
     let taskId = req.params.id;
-    console.log(reqId);
+    console.log(taskId);
     let sqlText = `DELETE FROM list WHERE id=$1;`;
 
     pool.query(sqlText, [taskId])

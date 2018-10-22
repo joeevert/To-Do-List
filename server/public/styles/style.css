@@ -3,8 +3,13 @@ body {
     font-family: 'Ubuntu', sans-serif;
 }
 
+h1 {
+    font-size: 75px;
+}
+
 .jumbotron {
-    background-color: #ff6200;
+    background-color: #9400D3;
+    color: #fff;
 }
 
 .taskComplete {
@@ -12,4 +17,9 @@ body {
     background-color: green;
 }
 
-/* $('#dropdown').css('z-index','999')  */
+/* .taskComplete:checked {
+    color: #fff;
+    background-color: green;
+} */
+
+/* $('#dropdown').css('z-index','999')  hint from Trevor*/
