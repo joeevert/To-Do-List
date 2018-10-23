@@ -7,6 +7,10 @@ h1 {
     font-size: 75px;
 }
 
+/* tr:hover {
+    background-color: #ffff00;
+} */
+
 .jumbotron {
     background-color: #9400D3;
     color: #fff;

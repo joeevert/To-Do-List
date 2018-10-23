@@ -39,9 +39,9 @@ listRouter.get('/', (req,res) => {
 
 // POST
 listRouter.post('/', (req, res) => {
-    const newTask = req.body;
+    let newTask = req.body;
     console.log(newTask);
-    const sqlText = `INSERT INTO list (item, status) VALUES ($1, $2);`;
+    let sqlText = `INSERT INTO list (item, status) VALUES ($1, $2);`;
 
     pool.query(sqlText, [newTask.item, newTask.status])
     .then((result) => {

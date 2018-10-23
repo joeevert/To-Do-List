@@ -1,15 +1,24 @@
 -- todo database setup
 
+-- table setup
 CREATE TABLE list (
     id SERIAL PRIMARY KEY,
-    taskName VARCHAR (100) NOT NULL,
+    item VARCHAR (100) NOT NULL,
+	status BOOLEAN DEFAULT FALSE
 );
 
-INSERT INTO todo_list (taskName)
+-- test data
+INSERT INTO list (item)
 VALUES ('Do your homework');
 
-INSERT INTO todo_list (taskName)
+INSERT INTO list (item)
 VALUES ('Groceries');
 
-INSERT INTO todo_list (taskName)
-VALUES ('Mow the lawn);
+INSERT INTO list (item)
+VALUES ('Mow the lawn');
+
+INSERT INTO list (item)
+VALUES ('Oil change');
+
+INSERT INTO list (item)
+VALUES ('gym');
