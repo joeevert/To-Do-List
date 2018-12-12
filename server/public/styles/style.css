@@ -1,29 +1,14 @@
 body {
-    background: #eee;
+    background: #edf5e1;
     font-family: 'Ubuntu', sans-serif;
 }
 
-h1 {
-    font-size: 75px;
-}
-
-/* tr:hover {
-    background-color: #ffff00;
-} */
-
 .jumbotron {
-    background-color: #9400D3;
+    background-color: #05386B;
     color: #fff;
 }
 
 .taskComplete {
     color: #fff;
-    background-color: green;
+    background-color: #5cdb95;
 }
-
-/* .taskComplete:checked {
-    color: #fff;
-    background-color: green;
-} */
-
-/* $('#dropdown').css('z-index','999')  hint from Trevor*/
