@@ -24,7 +24,7 @@ pool.on('error', (error) => {
 
 // GET
 listRouter.get('/', (req,res) => {    
-    let sqlText = `SELECT * FROM list ORDER BY item DESC;`;
+    let sqlText = `SELECT * FROM list ORDER BY status ASC;`;
 
     pool.query(sqlText)
         .then((result) => {
@@ -58,7 +58,8 @@ listRouter.post('/', (req, res) => {
 listRouter.put('/status/:id', (req, res) => {
     let taskId = req.params.id;
     let sqlText = '';
-    sqlText = `UPDATE list SET status = true WHERE id=$1;`;
+    // sqlText = `UPDATE list SET status = true WHERE id=$1;`;
+    sqlText = `UPDATE list SET status = NOT status WHERE id = $1;`; //toggle boolean
 
     pool.query(sqlText, [taskId])
     .then((result) => {

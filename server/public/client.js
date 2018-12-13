@@ -37,7 +37,8 @@ function deleteTask() {
             getToDoList();  
         })
         .catch( function (error) {
-            console.log(error);        
+            console.log(error);
+            swal('Internal Server Error!');
         })
         }
         else {
@@ -105,18 +106,22 @@ function displayList(list) {
             let tr = '';
             if ( task.status === true ) {
                 tr = $(`
-                <tr class="taskComplete">
-                    <td>${task.item}</td>
-                    <td>Completed!</td>
-                    <td><button type="button" class="btn btn-outline-danger" id="delete-btn">Delete</button></td>
+                <tr class="bg-success text-white">
+                    <td class="taskComplete align-middle">
+                        <h4>${task.item}</h4>
+                    </td>
+                    <td><button type="button" class="btn btn-warning" id="complete-btn">Uncheck</button>
+                    <button type="button" class="btn btn-danger" id="delete-btn">Delete</button></td>
                 </tr>`);
             }
             else {
                 tr = $(`
                 <tr>
-                    <td>${task.item}</td>
-                    <td><button type="button" class="btn btn-outline-secondary" id="complete-btn">Complete</button></td>
-                    <td><button type="button" class="btn btn-outline-danger" id="delete-btn">Delete</button></td>
+                    <td class="align-middle">
+                        <h4>${task.item}</h4>
+                    </td>
+                    <td><button type="button" class="btn btn-outline-success" id="complete-btn">Complete</button>
+                    <button type="button" class="btn btn-outline-danger" id="delete-btn">Delete</button></td>
                 </tr>`);
             }
         $('#todo-list').append(tr);

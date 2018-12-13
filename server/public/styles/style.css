@@ -9,6 +9,9 @@ body {
 }
 
 .taskComplete {
-    color: #fff;
-    background-color: #5cdb95;
+    text-decoration: line-through;
+}
+
+.input-group {
+    margin-bottom: 25px;
 }
