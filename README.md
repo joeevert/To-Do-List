@@ -1,61 +1,59 @@
+# To Do List
 
-## Weekend Challenge #3
+This is a 'To Do List' app that allows the user to create and store tasks inside of a database. Each task has an option to 'Complete' or 'Delete'. When a task is completed, the visual representation of the task updates and gives the user the option to 'Uncheck' the task.
 
-Hello Primers! 
+## Built With
 
-Welcome to your 3rd weekend challenge!
+* Javascript
+* jQuery
+* Bootstrap
+* CSS
 
-Full stack is pretty awesome, huh? The idea that you are able to spin up a full application architecture in such a short time is pretty incredible. This weekend is all about showing us that you have a handle on each of the different parts of the full stack. 
+## Getting Started
 
-## The To-Do App
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-You are going to create a 'TO DO' application. This type of application is very common to tackle when learning a new language, which makes it extremely valuable to work through for the first time. Chances are good that at some point in your career you will tackle this again while learning another language.
+### Prerequisites
 
-**Here are the specific components for the challenge:**
+Before you get started, make sure you have the following software installed:
 
-* Create a front end experience that allows a user to create a Task.
-+ When the Task is created, it should be stored inside of a database (SQL)
-+ Whenever a Task is created the front end should refresh to show all tasks that need to be completed.
-* Each Task should have an option to 'Complete' or 'Delete'.
-* When a Task is complete, its visual representation should change on the front end. For example, the background of the task container could change from gray to green. The complete option should be  'checked off'. Each of these are accomplished in CSS, but will need to hook into logic to know whether or not the task is complete.
-* Whether or not a Task is complete should also be stored in the database.
-+ Deleting a Task should remove it both from the front end as well as the Database.
+- [Node.js](https://nodejs.org/en/)
+- [PostrgeSQL](https://www.postgresql.org/)
 
-### Styling
+### Create database
 
-Use CSS styling to move the aesthetic of the page beyond the vanilla HTML look:
+1. Create a new database called `weekend-to-do-app`
+2. Then create a table called `list`
 
-Background color of the page
-font family and size
-text color & or background color of tasks to show whether or not they have been completed
+```SQL
+CREATE TABLE list (
+    id SERIAL PRIMARY KEY,
+    item VARCHAR (100) NOT NULL,
+	status BOOLEAN DEFAULT FALSE
+);
+```
 
-### Approach
+### Installing
 
-We would recommend you spend some time thinking about how to approach this problem. Think through all the logic that will be needed prior to writing any code. Take your time, relax, remember that impostor syndrome is real, and that you are capable of knocking this out of the park!
+Steps to get the development environment running.
 
-### Create a Database
+1. Download this project.
+2. Run `npm install`
+3. Start PostgreSQL if not running already by using `brew services start postgresql`
+4. Run `npm start`
+5. Navigate to `localhost:5000`
 
-Be sure to create a new database through Postico. Use the name `weekend-to-do-app`. You will need to use this name in your database connection configuration on your server.
+### Completed Features
 
-### Database Structure
+- [x] Feature `add-task`
+- [x] Feature `delete-task`
+- [x] Feature `complete-task`
+- [x] Feature `uncheck-task`
 
-Please include a `database.sql` text file in your repo that includes all of your `CREATE TABLE` queries. This is so we can re-create your database while testing your app.
+### Author
 
-## Stretch Goals
+Joe Evert
 
-For each of your strech goals, you will be practicing git branching. Please refer to the branching notes for a reminder on commands. Each branch will be merged into master using `--no-ff`. This will allow us to see that you branched your feature when you turn in your code.
+### Acknowledgements
 
-- `feature-styling-bootstrap` 
-
-    - [ ]  Add Bootstrap to the front end and style it up!
-     -  Buttons
-     -  Cards
-     -  Jumbotron
-
-- `feature-confirm-delete`
-
-    - [ ]  In whatever fashion you would like, create an 'are you sure: yes / no' option when deleting a task.
-
-- `feature-completed-task-ordering` 
-
-    - [ ]  Adjust the logic so that completed tasks are brought to the bottom of the page, where the remaining tasks left to complete are brought to the top of the list.
+Prime Digital Academy
